@@ -24,5 +24,3 @@ public class Paper {
     private String openStatus;
     private String userId;
 }
-
-

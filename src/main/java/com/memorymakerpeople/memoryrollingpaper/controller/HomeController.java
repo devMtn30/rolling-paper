@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 public class HomeController {
 
     @GetMapping("/")
-    public String home(@SessionAttribute(name = SessionConstants.LOGIN_MEMBER, required = false) Member loginMember, Model model) {
+    public String home(@SessionAttribute(name = SessionConstants.LOGIN_MEMBER, required = false) String loginMember, Model model) {
         // 세션에 회원 데이터가 없으면 홈으로 이동
         if (loginMember == null) {
             return "home";

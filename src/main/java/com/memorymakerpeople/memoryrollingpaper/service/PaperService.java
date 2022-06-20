@@ -33,20 +33,20 @@ public class PaperService {
         return result;
     }
 
-    public List<Paper> selectPaper(Paper paper){
+    public List<PaperResponseDto> selectPaper(Paper paper){
         return paperRepository.findByUserId(paper.getUserId());
     }
 
-    public PaperResponseDto selectOnePaper(Paper paper){
+    public PaperResponseDto selectOnePaper(PaperRequestDto paper){
         PaperResponseDto paperResponseDto = new PaperResponseDto();
         paperResponseDto.setCardList(cardRepository.findByPaperId(paper.getPaperId()));
-        paperResponseDto.setUserId(paper.getUserId());
+        /*paperResponseDto.setUserId(paper.getUserId());
         paperResponseDto.setPaperUrl(paper.getPaperUrl());
         paperResponseDto.setPaperTitle(paper.getPaperTitle());
         paperResponseDto.setPaperId(paper.getPaperId());
         paperResponseDto.setDueDt(paper.getDueDt());
         paperResponseDto.setTheme(paper.getTheme());
-        paperResponseDto.setOpenStatus(paper.getOpenStatus());
+        paperResponseDto.setOpenStatus(paper.getOpenStatus());*/
         return paperResponseDto;
     }
 }
