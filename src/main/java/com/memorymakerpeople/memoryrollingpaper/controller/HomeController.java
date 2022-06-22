@@ -1,10 +1,10 @@
 package com.memorymakerpeople.memoryrollingpaper.controller;
 
-import com.memorymakerpeople.memoryrollingpaper.domain.Member;
 import com.memorymakerpeople.memoryrollingpaper.util.SessionConstants;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
@@ -22,4 +22,7 @@ public class HomeController {
 
         return "loginHome";
     }
+
+    @GetMapping("/api/usage")
+        public String api() { return "redirect:/swagger-ui/index.html"; }
 }

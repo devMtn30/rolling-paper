@@ -8,7 +8,6 @@ import com.memorymakerpeople.memoryrollingpaper.util.SessionUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,18 +29,13 @@ public class PaperController {
 
     @PostMapping
     @ApiOperation(value = "롤링페이퍼 생성", notes = "현재 로그인된 아이디를 기준으로 롤링페이퍼를 생성 합니다.")
-    public PaperRequestDto createPaper(PaperRequestDto paperRequestDto, HttpServletRequest request, HttpServletResponse response){
-        PaperRequestDto result = new PaperRequestDto();
-        Paper paper = new Paper();
+    public PaperResponseDto createPaper(Paper paper, HttpServletRequest request, HttpServletResponse response){
+        PaperResponseDto result = new PaperResponseDto();
         String loginId = sessionUtils.GetLoginId(request);
         if (loginId.isEmpty()){
             result.statusCode = "fail";
             result.message = "not found user";
         }else{
-            paper.setUserId(loginId);
-            paper.setPaperTitle(paperRequestDto.getPaperTitle());
-            paper.setDueDt(paperRequestDto.getDueDt());
-            paper.setTheme(paperRequestDto.getTheme());
             paper.setPaperUrl(UUID.randomUUID().toString());
             result = paperService.createPaper(paper);
             if(result.getPaperId() < 0){
@@ -55,9 +49,12 @@ public class PaperController {
 
     @GetMapping
     @ApiOperation(value = "롤링페이퍼 목록", notes = "현재 로그인된 아이디를 기준으로 생성된 롤링페이퍼를 조회합니다.")
-    public List<PaperResponseDto> paper(HttpServletRequest request, HttpServletResponse response){
-        Paper paper = new Paper();
+    public List<Paper> paper(HttpServletRequest request, HttpServletResponse response){
         String loginId = sessionUtils.GetLoginId(request);
+        if (loginId.isEmpty()){
+            return null;
+        }
+        Paper paper = new Paper();
         paper.setUserId(loginId);
         return paperService.selectPaper(paper);
     }
@@ -65,6 +62,10 @@ public class PaperController {
     @GetMapping("/paperDetail")
     @ApiOperation(value = "롤링페이퍼 보기", notes = "하나의 롤링페이퍼를 조회합니다.")
     public PaperResponseDto paperDetail(PaperRequestDto paperRequestDto, HttpServletRequest request, HttpServletResponse response){
+        String loginId = sessionUtils.GetLoginId(request);
+        if (loginId.isEmpty()){
+            return null;
+        }
         paperRequestDto.setUserId(sessionUtils.GetLoginId(request));
         return paperService.selectOnePaper(paperRequestDto);
     }

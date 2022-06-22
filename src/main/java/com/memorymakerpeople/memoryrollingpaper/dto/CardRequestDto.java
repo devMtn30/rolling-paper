@@ -3,7 +3,7 @@ package com.memorymakerpeople.memoryrollingpaper.dto;
 import lombok.Data;
 
 @Data
-public class CardRequestDto extends DefaultResponseDto{
+public class CardRequestDto{
     private int cardId;
     private String cardText;
     private String cardColor;
