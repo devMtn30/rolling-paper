@@ -19,8 +19,8 @@ public class PaperService {
     @Autowired
     private CardRepository cardRepository;
 
-    public PaperRequestDto createPaper(Paper paper) {
-        PaperRequestDto result = new PaperRequestDto();
+    public PaperResponseDto createPaper(Paper paper) {
+        PaperResponseDto result = new PaperResponseDto();
         Paper save = paperRepository.save(paper);
         if (save == null){
             result.statusCode = "fail";
@@ -33,13 +33,14 @@ public class PaperService {
         return result;
     }
 
-    public List<PaperResponseDto> selectPaper(Paper paper){
+    public List<Paper> selectPaper(Paper paper){
         return paperRepository.findByUserId(paper.getUserId());
     }
 
     public PaperResponseDto selectOnePaper(PaperRequestDto paper){
         PaperResponseDto paperResponseDto = new PaperResponseDto();
-        paperResponseDto.setCardList(cardRepository.findByPaperId(paper.getPaperId()));
+        String paperId = String.valueOf(paper.getPaperId());
+        paperResponseDto.setCardList(cardRepository.findByPaperId(paperId));
         /*paperResponseDto.setUserId(paper.getUserId());
         paperResponseDto.setPaperUrl(paper.getPaperUrl());
         paperResponseDto.setPaperTitle(paper.getPaperTitle());

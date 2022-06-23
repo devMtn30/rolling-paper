@@ -1,33 +1,19 @@
 package com.memorymakerpeople.memoryrollingpaper.controller;
 
-import com.memorymakerpeople.memoryrollingpaper.domain.Member;
 import com.memorymakerpeople.memoryrollingpaper.dto.DefaultResponseDto;
 import com.memorymakerpeople.memoryrollingpaper.dto.MemberRequestDto;
 import com.memorymakerpeople.memoryrollingpaper.service.MemberService;
-import com.memorymakerpeople.memoryrollingpaper.util.JwtProvider;
 import com.memorymakerpeople.memoryrollingpaper.util.SessionConstants;
-import io.jsonwebtoken.Claims;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.List;
 
 @RestController
 @Api(tags = {"회원관리 API"})

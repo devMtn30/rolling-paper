@@ -22,4 +22,7 @@ public class HomeController {
 
         return "loginHome";
     }
+
+    @GetMapping("/api/usage")
+        public String api() { return "redirect:/swagger-ui/index.html"; }
 }

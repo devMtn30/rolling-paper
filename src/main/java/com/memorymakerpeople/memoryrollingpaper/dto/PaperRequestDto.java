@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
-public class PaperRequestDto extends DefaultResponseDto{
+public class PaperRequestDto{
     private int paperId;
     private String paperTitle;
     private Timestamp dueDt;
