@@ -37,6 +37,7 @@ public class PaperController {
             result.message = "not found user";
         }else{
             paper.setPaperUrl(UUID.randomUUID().toString());
+            paper.setUserId(loginId);
             result = paperService.createPaper(paper);
             if(result.getPaperId() < 0){
                 result.statusCode = "fail";

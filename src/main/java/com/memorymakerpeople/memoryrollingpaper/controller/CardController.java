@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static com.memorymakerpeople.memoryrollingpaper.util.SessionUtils.*;
+
 
 @RestController
 @RequestMapping("/Card")
@@ -20,10 +22,10 @@ public class CardController {
 
     @Autowired
     private CardService cardService;
-    private SessionUtils sessionUtils;
+
     @PostMapping
     public Card createCard(Card card, HttpServletRequest request, HttpServletResponse response){
-        String loginId = sessionUtils.GetLoginId(request);
+        String loginId = SessionUtils.GetLoginId(request);
         if (loginId.isEmpty()){
             return null;
         }

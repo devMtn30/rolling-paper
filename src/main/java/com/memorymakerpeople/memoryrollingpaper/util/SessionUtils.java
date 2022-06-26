@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 public class SessionUtils {
 
-    public String GetLoginId(HttpServletRequest request){
+    public static String GetLoginId(HttpServletRequest request){
         HttpSession session = request.getSession();
         String loginId = (String) session.getAttribute(SessionConstants.LOGIN_MEMBER);
 
