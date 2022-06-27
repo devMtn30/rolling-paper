@@ -1,10 +1,6 @@
 package com.memorymakerpeople.memoryrollingpaper.dto;
 
-import com.memorymakerpeople.memoryrollingpaper.domain.Card;
 import lombok.Data;
-
-import java.sql.Timestamp;
-import java.util.List;
 
 @Data
 public class CardResponseDto extends DefaultResponseDto{

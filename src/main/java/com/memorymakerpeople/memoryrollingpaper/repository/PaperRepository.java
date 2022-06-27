@@ -1,7 +1,6 @@
 package com.memorymakerpeople.memoryrollingpaper.repository;
 
 import com.memorymakerpeople.memoryrollingpaper.domain.Paper;
-import com.memorymakerpeople.memoryrollingpaper.dto.PaperResponseDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

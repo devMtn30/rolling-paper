@@ -1,11 +1,7 @@
 package com.memorymakerpeople.memoryrollingpaper.service;
 
 import com.memorymakerpeople.memoryrollingpaper.domain.Card;
-import com.memorymakerpeople.memoryrollingpaper.dto.CardRequestDto;
-import com.memorymakerpeople.memoryrollingpaper.dto.CardResponseDto;
 import com.memorymakerpeople.memoryrollingpaper.repository.CardRepository;
-import com.memorymakerpeople.memoryrollingpaper.repository.PaperRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

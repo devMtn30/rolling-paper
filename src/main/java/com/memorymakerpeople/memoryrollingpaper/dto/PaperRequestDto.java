@@ -3,7 +3,6 @@ package com.memorymakerpeople.memoryrollingpaper.dto;
 import lombok.Data;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Data
 public class PaperRequestDto{

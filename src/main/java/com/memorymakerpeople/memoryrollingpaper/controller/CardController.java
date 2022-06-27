@@ -1,8 +1,6 @@
 package com.memorymakerpeople.memoryrollingpaper.controller;
 
 import com.memorymakerpeople.memoryrollingpaper.domain.Card;
-import com.memorymakerpeople.memoryrollingpaper.dto.CardRequestDto;
-import com.memorymakerpeople.memoryrollingpaper.dto.CardResponseDto;
 import com.memorymakerpeople.memoryrollingpaper.service.CardService;
 import com.memorymakerpeople.memoryrollingpaper.util.SessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import static com.memorymakerpeople.memoryrollingpaper.util.SessionUtils.*;
 
 
 @RestController
