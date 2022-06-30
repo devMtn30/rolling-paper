@@ -32,7 +32,7 @@ public class MemberController {
         if (result.statusCode == "complete") {
             // 로그인 성공 처리
             HttpSession session = request.getSession();                         // 세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성하여 반환
-            session.setAttribute(SessionConstants.LOGIN_MEMBER, memberRequestDto.getId());   // 세션에 로그인 회원 정보 보관
+            session.setAttribute(SessionConstants.LOGIN_MEMBER, memberRequestDto);   // 세션에 로그인 회원 정보 보관
             session.setMaxInactiveInterval(1800); // 1800초
             response.setStatus(HttpStatus.OK.value());
         }

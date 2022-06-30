@@ -22,12 +22,11 @@ public class PaperService {
     public PaperResponseDto createPaper(Paper paper) {
         PaperResponseDto result = new PaperResponseDto();
         Paper save = paperRepository.save(paper);
+        result.message = "Create Paper";
         if (save == null){
             result.statusCode = "fail";
-            result.message = "페이지 생성";
         }else{
             result.statusCode = "complete";
-            result.message = "페이지 생성";
         }
 
         return result;
@@ -49,5 +48,31 @@ public class PaperService {
         paperResponseDto.setTheme(paper.getTheme());
         paperResponseDto.setOpenStatus(paper.getOpenStatus());*/
         return paperResponseDto;
+    }
+
+    public PaperResponseDto updatePaper(Paper paper) {
+        PaperResponseDto result = new PaperResponseDto();
+        Paper save = paperRepository.save(paper);
+        result.message = "Update Paper";
+        if (save == null){
+            result.statusCode = "fail";
+        }else{
+            result.statusCode = "complete";
+        }
+
+        return result;
+    }
+
+    public PaperResponseDto deletePaper(Paper paper) {
+        PaperResponseDto result = new PaperResponseDto();
+        Paper save = paperRepository.save(paper);
+        result.message = "Delete Paper";
+        if (save == null){
+            result.statusCode = "fail";
+        }else{
+            result.statusCode = "complete";
+        }
+
+        return result;
     }
 }

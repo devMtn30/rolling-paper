@@ -8,10 +8,7 @@ import com.memorymakerpeople.memoryrollingpaper.util.SessionUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,24 +22,21 @@ public class PaperController {
 
     @Autowired
     private PaperService paperService;
-    SessionUtils sessionUtils = new SessionUtils();
 
     @PostMapping
     @ApiOperation(value = "롤링페이퍼 생성", notes = "현재 로그인된 아이디를 기준으로 롤링페이퍼를 생성 합니다.")
     public PaperResponseDto createPaper(Paper paper, HttpServletRequest request, HttpServletResponse response){
         PaperResponseDto result = new PaperResponseDto();
-        String loginId = sessionUtils.GetLoginId(request);
+        String loginId = SessionUtils.GetLoginId(request);
         if (loginId.isEmpty()){
             result.statusCode = "fail";
             result.message = "not found user";
-        }else{
-            paper.setPaperUrl(UUID.randomUUID().toString());
+        }else {
+            String uuid = UUID.randomUUID().toString();
+            paper.setPaperUrl(uuid);
             paper.setUserId(loginId);
+            result.setPaperUrl(uuid);
             result = paperService.createPaper(paper);
-            if(result.getPaperId() < 0){
-                result.statusCode = "fail";
-                result.message = "crate paper";
-            }
         }
 
         return result;
@@ -50,8 +44,8 @@ public class PaperController {
 
     @GetMapping
     @ApiOperation(value = "롤링페이퍼 목록", notes = "현재 로그인된 아이디를 기준으로 생성된 롤링페이퍼를 조회합니다.")
-    public List<Paper> paper(HttpServletRequest request, HttpServletResponse response){
-        String loginId = sessionUtils.GetLoginId(request);
+    public List<Paper> paperList(HttpServletRequest request, HttpServletResponse response){
+        String loginId = SessionUtils.GetLoginId(request);
         if (loginId.isEmpty()){
             return null;
         }
@@ -60,15 +54,40 @@ public class PaperController {
         return paperService.selectPaper(paper);
     }
 
-    @GetMapping("/paperDetail")
+    @GetMapping("/{paperId}")
     @ApiOperation(value = "롤링페이퍼 보기", notes = "하나의 롤링페이퍼를 조회합니다.")
     public PaperResponseDto paperDetail(PaperRequestDto paperRequestDto, HttpServletRequest request, HttpServletResponse response){
-        String loginId = sessionUtils.GetLoginId(request);
+        String loginId = SessionUtils.GetLoginId(request);
         if (loginId.isEmpty()){
             return null;
         }
-        paperRequestDto.setUserId(sessionUtils.GetLoginId(request));
+        paperRequestDto.setUserId(loginId);
         return paperService.selectOnePaper(paperRequestDto);
     }
 
+    @PutMapping
+    @ApiOperation(value = "롤링페이퍼 수정", notes = "롤링페이퍼를 수정합니다.")
+    public PaperResponseDto updatePaper(Paper paper, HttpServletRequest request, HttpServletResponse response){
+        PaperResponseDto result = new PaperResponseDto();
+        String loginId = SessionUtils.GetLoginId(request);
+        if (loginId.isEmpty()){
+            result.statusCode = "fail";
+            result.message = "not found user";
+        }
+
+        return paperService.updatePaper(paper);
+    }
+
+    @PutMapping
+    @ApiOperation(value = "롤링페이퍼 삭제", notes = "롤링페이퍼를 삭제합니다.")
+    public PaperResponseDto deletePaperPaper(Paper paper, HttpServletRequest request, HttpServletResponse response){
+        PaperResponseDto result = new PaperResponseDto();
+        String loginId = SessionUtils.GetLoginId(request);
+        if (loginId.isEmpty()){
+            result.statusCode = "fail";
+            result.message = "not found user";
+        }
+
+        return paperService.deletePaper(paper);
+    }
 }
