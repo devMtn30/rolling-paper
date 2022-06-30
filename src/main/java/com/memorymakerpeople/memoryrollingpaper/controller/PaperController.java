@@ -65,7 +65,7 @@ public class PaperController {
         return paperService.selectOnePaper(paperRequestDto);
     }
 
-    @PutMapping
+    @PutMapping("update")
     @ApiOperation(value = "롤링페이퍼 수정", notes = "롤링페이퍼를 수정합니다.")
     public PaperResponseDto updatePaper(Paper paper, HttpServletRequest request, HttpServletResponse response){
         PaperResponseDto result = new PaperResponseDto();
@@ -78,7 +78,7 @@ public class PaperController {
         return paperService.updatePaper(paper);
     }
 
-    @PutMapping
+    @PutMapping("delete")
     @ApiOperation(value = "롤링페이퍼 삭제", notes = "롤링페이퍼를 삭제합니다.")
     public PaperResponseDto deletePaperPaper(Paper paper, HttpServletRequest request, HttpServletResponse response){
         PaperResponseDto result = new PaperResponseDto();

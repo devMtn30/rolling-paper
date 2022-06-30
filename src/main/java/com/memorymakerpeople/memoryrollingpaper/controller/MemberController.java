@@ -2,13 +2,18 @@ package com.memorymakerpeople.memoryrollingpaper.controller;
 
 import com.memorymakerpeople.memoryrollingpaper.dto.DefaultResponseDto;
 import com.memorymakerpeople.memoryrollingpaper.dto.MemberRequestDto;
+import com.memorymakerpeople.memoryrollingpaper.dto.MemberResponseDto;
+import com.memorymakerpeople.memoryrollingpaper.dto.PaperResponseDto;
 import com.memorymakerpeople.memoryrollingpaper.service.MemberService;
 import com.memorymakerpeople.memoryrollingpaper.util.SessionConstants;
+import com.memorymakerpeople.memoryrollingpaper.util.SessionUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @Api(tags = {"회원관리 API"})
+@RequestMapping("/member")
 public class MemberController {
 
     @Autowired
@@ -24,8 +30,8 @@ public class MemberController {
 
     @ApiOperation(value = "카카오 회원 로그인/회원가입", notes = "카카오에서 발급하는 id를 사용해 로그인을 합니다. 만약 기존 회원이 아니라면 추가(회원가입) 합니다.")
     @PostMapping("/login")
-    public DefaultResponseDto register(MemberRequestDto memberRequestDto, HttpServletRequest request, HttpServletResponse response) throws Exception{
-        DefaultResponseDto result = memberService.joinUser(memberRequestDto);
+    public MemberResponseDto register(MemberRequestDto memberRequestDto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+        MemberResponseDto result = memberService.joinUser(memberRequestDto);
         if (result.message == "register" && result.statusCode == "complete") {
             result = memberService.joinUser(memberRequestDto);
         }
@@ -54,4 +60,16 @@ public class MemberController {
         return result;
     }
 
+    @ApiOperation(value = "닉네임 설정", notes = "닉네임 설정")
+    @PutMapping
+    public MemberResponseDto setNickname(HttpServletRequest request, MemberRequestDto memberRequestDto) {
+        MemberResponseDto result = new MemberResponseDto();
+        String loginId = SessionUtils.GetLoginId(request);
+        if (loginId.isEmpty()){
+            result.statusCode = "fail";
+            result.message = "not found user";
+        }
+        memberService.setNickname(memberRequestDto);
+        return result;
+    }
 }

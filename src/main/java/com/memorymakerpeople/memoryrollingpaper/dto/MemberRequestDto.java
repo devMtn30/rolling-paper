@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class MemberRequestDto{
-    private String id;
-    private String accessToken;
-    private String refreshToken;
-
+    public Integer id;
+    public String username;//아이디
+    private String nickname;
+    private String email;
 }
