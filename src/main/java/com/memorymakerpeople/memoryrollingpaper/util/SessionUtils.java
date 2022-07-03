@@ -13,4 +13,9 @@ public class SessionUtils {
         String loginId = sessionAttribute.getUsername();
         return loginId;
     }
+
+    public static Member GetSessionMember(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        return (Member) session.getAttribute(SessionConstants.LOGIN_MEMBER);
+    }
 }

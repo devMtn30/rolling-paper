@@ -25,7 +25,7 @@ public class PaperController {
 
     @PostMapping
     @ApiOperation(value = "롤링페이퍼 생성", notes = "현재 로그인된 아이디를 기준으로 롤링페이퍼를 생성 합니다.")
-    public PaperResponseDto createPaper(Paper paper, HttpServletRequest request, HttpServletResponse response){
+    public PaperResponseDto createPaper(@RequestBody Paper paper, HttpServletRequest request, HttpServletResponse response){
         PaperResponseDto result = new PaperResponseDto();
         String loginId = SessionUtils.GetLoginId(request);
         if (loginId.isEmpty()){
@@ -67,7 +67,7 @@ public class PaperController {
 
     @PutMapping("update")
     @ApiOperation(value = "롤링페이퍼 수정", notes = "롤링페이퍼를 수정합니다.")
-    public PaperResponseDto updatePaper(Paper paper, HttpServletRequest request, HttpServletResponse response){
+    public PaperResponseDto updatePaper(@RequestBody Paper paper, HttpServletRequest request, HttpServletResponse response){
         PaperResponseDto result = new PaperResponseDto();
         String loginId = SessionUtils.GetLoginId(request);
         if (loginId.isEmpty()){
@@ -80,7 +80,7 @@ public class PaperController {
 
     @PutMapping("delete")
     @ApiOperation(value = "롤링페이퍼 삭제", notes = "롤링페이퍼를 삭제합니다.")
-    public PaperResponseDto deletePaperPaper(Paper paper, HttpServletRequest request, HttpServletResponse response){
+    public PaperResponseDto deletePaper(@RequestBody Paper paper, HttpServletRequest request, HttpServletResponse response){
         PaperResponseDto result = new PaperResponseDto();
         String loginId = SessionUtils.GetLoginId(request);
         if (loginId.isEmpty()){

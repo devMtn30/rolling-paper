@@ -1,6 +1,7 @@
 package com.memorymakerpeople.memoryrollingpaper.domain;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
+@DynamicUpdate // 변경한 필드만 대응
 @Table(name = "tbl_user")
 public class Member implements Serializable {
 

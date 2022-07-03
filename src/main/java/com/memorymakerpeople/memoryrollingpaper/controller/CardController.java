@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/Card")
+@RequestMapping("/card")
 @Api(tags = {"카드 관리 API"})
 public class CardController {
 
@@ -25,7 +25,7 @@ public class CardController {
 
     @PostMapping
     @ApiOperation(value = "카드 생성", notes = "하나의 롤링페이퍼에 있는 카드를 생성 합니다.")
-    public CardResponseDto createCard(Card card, HttpServletRequest request, HttpServletResponse response){
+    public CardResponseDto createCard(@RequestBody Card card, HttpServletRequest request, HttpServletResponse response){
         return cardService.createCard(card);
     }
 

@@ -65,6 +65,7 @@ public class PaperService {
 
     public PaperResponseDto deletePaper(Paper paper) {
         PaperResponseDto result = new PaperResponseDto();
+        paper.setDeleteYn("Y");
         Paper save = paperRepository.save(paper);
         result.message = "Delete Paper";
         if (save == null){
